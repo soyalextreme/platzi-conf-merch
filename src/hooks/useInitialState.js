@@ -15,11 +15,17 @@ const useInitialState = () => {
     });
   };
 
-
   const addToBuyer = (payload) => {
     setState({
       ...state,
       buyer: payload,
+    });
+  };
+
+  const addNewOrder = (payload) => {
+    setState({
+      ...state,
+      orders: [...state.orders, payload],
     });
   };
 
