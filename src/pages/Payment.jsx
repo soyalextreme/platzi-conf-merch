@@ -6,8 +6,8 @@ import { CLIENT_ID_PAYPAL } from '../.config';
 import { handleSumTotal } from '../utils';
 
 const Payment = ({ history }) => {
-  const { state } = useContext(AppContext);
-  const { cart, buyer, addNewOrder } = state;
+  const { state, addNewOrder } = useContext(AppContext);
+  const { cart, buyer } = state;
 
   const paypalOptions = {
     clientId: CLIENT_ID_PAYPAL,
@@ -29,9 +29,8 @@ const Payment = ({ history }) => {
         product: cart,
         payment: data,
       };
-
       addNewOrder(newOrder);
-      history.push('/checkout/success');;;
+      history.push('/checkout/success');
     }
   };
 
