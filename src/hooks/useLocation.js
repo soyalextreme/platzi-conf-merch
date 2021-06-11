@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { API_KEY_POSITIONS_STACK } from '../.config';
 
 const useGoogleAddress = (address) => {
   const [map, setMap] = useState({});
-  const API = `http://api.positionstack.com/v1/forward?access_key=${API_KEY_POSITIONS_STACK}&query=${address}`;
+  const API = `http://api.positionstack.com/v1/forward?access_key=${process.env.API_KEY_POSITIONS_STACK}&query=${address}`;
 
   //
 

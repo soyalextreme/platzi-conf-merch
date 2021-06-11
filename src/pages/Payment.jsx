@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import '../styles/components/Payment.css';
 import { PayPalButton } from 'react-paypal-button-v2';
 import AppContext from '../context/AppContext';
-import { CLIENT_ID_PAYPAL } from '../.config';
 import { handleSumTotal } from '../utils';
 
 const Payment = ({ history }) => {
@@ -46,7 +45,11 @@ const Payment = ({ history }) => {
         ))}
         <div className="Payment-button">
           <PayPalButton
-            options={{clientId: CLIENT_ID_PAYPAL, intent: "capture", currency: "MXN"}}
+            options={{
+              clientId: process.env.CLIENT_ID_PAYPAL,
+              intent: 'capture',
+              currency: 'MXN',
+            }}
             style={buttonStyles}
             amount={handleSumTotal(cart)}
             // createOrder={() => console.log('Start Payment')}

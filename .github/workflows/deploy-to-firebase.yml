@@ -17,6 +17,10 @@ jobs:
         with:
           name: dist
           path: dist
+        env: 
+          CLIENT_ID_PAYPAL: ${{ secrets.CLIENT_ID_PAYPAL }}
+          API_KEY_GOOGLE_MAPS: ${{ secrets.API_KEY_GOOGLE_MAPS }}
+          API_KEY_POSITIONS_STACK: ${{ secrets.API_KEY_POSITIONS_STACK }}
   deploy:
     name: Deploy
     needs: build
@@ -33,5 +37,8 @@ jobs:
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
-        env:
+        env: 
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          CLIENT_ID_PAYPAL: ${{ secrets.CLIENT_ID_PAYPAL }}
+          API_KEY_GOOGLE_MAPS: ${{ secrets.API_KEY_GOOGLE_MAPS }}
+          API_KEY_POSITIONS_STACK: ${{ secrets.API_KEY_POSITIONS_STACK }}
