@@ -3,16 +3,11 @@ import '../styles/components/Payment.css';
 import { PayPalButton } from 'react-paypal-button-v2';
 import AppContext from '../context/AppContext';
 import { handleSumTotal } from '../utils';
+import Head from '../components/Head';
 
 const Payment = ({ history }) => {
   const { state, addNewOrder } = useContext(AppContext);
   const { cart, buyer } = state;
-
-  const paypalOptions = {
-    clientId: process.env.CLIENT_ID_PAYPAL,
-    intent: 'capture',
-    currency: 'MXN',
-  };
 
   const buttonStyles = {
     layout: 'vertical',
@@ -32,35 +27,37 @@ const Payment = ({ history }) => {
   };
 
   return (
-    <div className="Payment">
-      <div className="Payment-content">
-        <h3>Resumen del pedido: </h3>
-        {cart.map((item) => (
-          <div key={item.title} className="Payment-item">
-            <div className="Payment-element">
-              <h4>{item.title}</h4>
-              <span>$ {item.price}</span>
+    <>
+      <Head title="Payment"    />
+      <div className="Payment">
+        <div className="Payment-content">
+          <h3>Resumen del pedido: </h3>
+          {cart.map((item) => (
+            <div key={item.title} className="Payment-item">
+              <div className="Payment-element">
+                <h4>{item.title}</h4>
+                <span>$ {item.price}</span>
+              </div>
             </div>
+          ))}
+          <div className="Payment-button">
+            <PayPalButton
+              options={{
+                clientId: process.env.CLIENT_ID_PAYPAL,
+                intent: 'capture',
+                currency: 'MXN',
+              }}
+              style={buttonStyles}
+              amount={handleSumTotal(cart)}
+              // createOrder={() => console.log('Start Payment')}
+              onSuccess={(data) => handlePaymentSuccess(data)}
+              onError={(error) => console.log(error.err)}
+              onCancel={(data) => console.log(data)}
+            />
           </div>
-        ))}
-        <div className="Payment-button">
-          <PayPalButton
-            options={{
-              clientId: process.env.CLIENT_ID_PAYPAL,
-              intent: 'capture',
-              currency: 'MXN',
-            }}
-            style={buttonStyles}
-            amount={handleSumTotal(cart)}
-            // createOrder={() => console.log('Start Payment')}
-            onSuccess={(data) => handlePaymentSuccess(data)}
-            onError={(error) => console.log(error.err)}
-            onCancel={(data) => console.log(data)}
-          />
         </div>
       </div>
-      <div></div>
-    </div>
+    </>
   );
 };
 

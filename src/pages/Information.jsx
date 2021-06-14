@@ -2,6 +2,7 @@ import React, { useRef, useContext } from 'react';
 import AppContext from '../context/AppContext';
 import { Link } from 'react-router-dom';
 import '../styles/components/Information.css';
+import Head from '../components/Head';
 
 const Information = ({ history }) => {
   const { state, addToBuyer } = useContext(AppContext);
@@ -29,6 +30,8 @@ const Information = ({ history }) => {
   }
 
   return (
+    <>
+    <Head title="Information"/>
     <div className="Information">
       <div className="Inforrmation-content">
         <div className="Information-head">
@@ -68,6 +71,7 @@ const Information = ({ history }) => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

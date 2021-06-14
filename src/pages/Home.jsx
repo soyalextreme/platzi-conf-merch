@@ -1,14 +1,12 @@
 import React from 'react';
 import initialState from '../initialState';
 import Products from '../components/Products';
-import { Helmet } from 'react-helmet';
+import Head from '../components/Head';
 
 const Home = () => {
   return (
     <>
-      <Helmet>
-        <title>Platzi Conf - Products</title>
-      </Helmet>
+      <Head title="Home" />
       <Products products={initialState.products} />
     </>
   );
